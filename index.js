@@ -1,3 +1,4 @@
+const fp = require('jsfp').utils;
 const isIntString = value => ! isNaN(value) && value.indexOf && value.indexOf('.') === -1;
 const isDateString = value => ! isNaN( Date.parse(value) );
 const isFloatString = value => ! isNaN(value) && value.indexOf && value.indexOf('.') > -1;
