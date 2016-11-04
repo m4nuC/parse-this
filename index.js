@@ -1,6 +1,7 @@
 const fp = require('jsfp').utils;
 const isIntString = value => ! isNaN(value) && value.indexOf && value.indexOf('.') === -1;
 const isDateString = value => ! isNaN( Date.parse(value) );
+const isBoolString = value => typeof value === 'string' && (value.toLowerCase() === 'true' || value.toLowerCase() === 'false');
 const isFloatString = value => ! isNaN(value) && value.indexOf && value.indexOf('.') > -1;
 const isObject = value => Object(value) === value;
 const isObjectID = value => typeof value === 'object' && ! value.hasOwnProperty('_bsontype');
@@ -20,6 +21,10 @@ const parse = (value) => {
   if (value instanceof Date) return value;
   if (isObjectID(value)) return value;
   if (isObject(value)) return objectParser(value);
+  if (isBoolString(value)) {
+    if (value.toLowerCase() === 'true') return true
+    else return false;
+  }
   if (isIntString(value)) return parseInt(value);
   if (isFloatString(value)) return parseFloat(value)
   if (isDateString(value)) return Date(value);
