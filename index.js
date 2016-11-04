@@ -14,6 +14,7 @@ const arrayParser = module.exports.arrayParser = (array) => {
 }
 
 const parse = (value) => {
+  if (value === 'null' || value === null) return null;
   if (Number.isInteger(value)) return value;
   if (Array.isArray(value)) return arrayParser(value);
   if (value instanceof Date) return value;
